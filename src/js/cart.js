@@ -2,6 +2,16 @@ import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+  
+  if (!cartItems || cartItems.length === 0) {
+    // Si el carrito está vacío, mostramos un mensaje amigable
+    document.querySelector(".product-list").innerHTML = "<li><p>Your cart is empty. Go add some tents!</p></li>";
+    
+    // Usamos 'return' para detener la ejecución de la función aquí. 
+    // Así evitamos que llegue al .map() y cause el error.
+    return; 
+  }
+
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }

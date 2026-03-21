@@ -21,3 +21,22 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  // Si 'clear' es verdadero, vaciamos el contenido actual del elemento
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  
+  // Mapeamos la lista de datos usando la función de plantilla proporcionada
+  const htmlStrings = list.map(templateFn);
+  
+  // Insertamos las cadenas HTML en el DOM en la posición indicada
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
+
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+}
