@@ -3,10 +3,12 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 // Función de plantilla para cada producto
 function productCardTemplate(product) {
-  // Asegúrate de que las propiedades (Id, Image, Brand.Name, etc.) coincidan exactamente con tu archivo JSON
+  // Agregamos un "?" después de Images para que si no existe, no rompa la página
+  const imagePath = product.Images?.PrimaryMedium || "https://placehold.co/300x300?text=No+Image";
+
   return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.Name}">
+    <a href="/product_pages/index.html?product=${product.Id}">
+      <img src="${imagePath}" alt="Image of ${product.Name}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
       <p class="product-card__price">$${product.ListPrice}</p>
@@ -23,7 +25,7 @@ export default class ProductList {
 
   async init() {
     // Obtenemos los datos (esto asume que getData() devuelve una promesa)
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     
     // Renderizamos la lista usando nuestro método refactorizado
     this.renderList(list);
