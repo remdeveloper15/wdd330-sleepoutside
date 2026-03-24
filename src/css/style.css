@@ -261,3 +261,35 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.category-list {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.category-item {
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.category-item:hover {
+  transform: scale(1.1); /* Un efecto de zoom al pasar el mouse */
+}
+
+.category-item img {
+  width: 80px; /* Ajusta el tamaño según prefieras */
+  height: auto;
+}
+
+.category-item h2 {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+.category-item a {
+  text-decoration: none;
+}

@@ -8,17 +8,19 @@ export default class ProductDetails {
     this.dataSource = dataSource;
   }
 
-  async init() {
-    // 1. Usar el dataSource para obtener los detalles del producto actual
-    this.product = await this.dataSource.findProductById(this.productId);
-    
-    // 2. Renderizar el HTML
-    this.renderProductDetails("main"); // Le pasamos el contenedor principal
-    
-    // 3. Agregar el listener al botón "Añadir al carrito" una vez que el HTML existe
-    document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
-  }
+async init() {
+  const element = document.querySelector("main");
+  element.innerHTML = "<p>Loading...</p>"; // Feedback visual
 
+  this.product = await this.dataSource.findProductById(this.productId);
+  
+  if (this.product) {
+    this.renderProductDetails("main");
+    document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
+  } else {
+    element.innerHTML = "<p>Lo sentimos, no pudimos encontrar el producto.</p>";
+  }
+}
   addToCart() {
     // Aquí usamos la función de utils.mjs para guardar en el carrito
     // (Asegúrate de tener setLocalStorage definido en utils.mjs)
@@ -40,7 +42,7 @@ export default class ProductDetails {
       <section class="product-detail">
         <h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-        <img class="divider" src="${this.product.Image}" alt="${this.product.Name}" />
+        <img class="divider" src="${this.product.Images.PrimaryLarge}" alt="${this.product.Name}" />
         <p class="product-card__price">$${this.product.ListPrice}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
