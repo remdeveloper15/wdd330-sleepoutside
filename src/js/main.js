@@ -1,6 +1,7 @@
 // main.js
 import ProductData from "./ProductData.mjs"; // Asegúrate de que la ruta sea correcta
 import ProductList from "./ProductList.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 // 1. Crear instancia de la fuente de datos (apuntando a la categoría correcta)
 const dataSource = new ProductData("tents");
@@ -13,3 +14,4 @@ const productList = new ProductList("tents", dataSource, listElement);
 
 // 4. Inicializar
 productList.init();
+loadHeaderFooter();

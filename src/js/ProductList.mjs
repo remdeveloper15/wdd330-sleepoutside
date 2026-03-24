@@ -31,6 +31,6 @@ export default class ProductList {
 
   // Método refactorizado que utiliza la función de utilidad externa
   renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
   }
 }
