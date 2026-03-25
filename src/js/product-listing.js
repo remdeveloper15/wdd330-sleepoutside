@@ -11,7 +11,7 @@ const listElement = document.querySelector('.product-list');
 const myList = new ProductList(category, dataSource, listElement);
 myList.init();
 
-if (category) {
+if (category && document.querySelector(".title")) {
   // 1. Buscamos el elemento del título (asegúrate de que tenga la clase .title o cámbiala por h2)
   const titleElement = document.querySelector('.title');
   
