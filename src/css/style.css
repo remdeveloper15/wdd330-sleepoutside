@@ -293,3 +293,19 @@ footer {
 .category-item a {
   text-decoration: none;
 }
+
+.cart-footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  text-align: right;
+}
+
+.cart-total {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
