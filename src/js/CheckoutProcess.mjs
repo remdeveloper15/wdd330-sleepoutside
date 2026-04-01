@@ -96,7 +96,7 @@ async checkout(form) {
             localStorage.removeItem("so-cart");
 
             // 3. Redirigimos a la página de éxito
-            window.location.href = "success.html";
+            window.location.href = "../success.html";
             
         } catch (err) {
 
