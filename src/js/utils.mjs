@@ -64,3 +64,35 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+// Función para crear la alerta
+export function alertMessage(message, scroll = true) {
+  // Creamos el div que contendrá la alerta
+  const alert = document.createElement("div");
+  alert.classList.add("alert"); // Le damos una clase para el CSS
+  
+  // Ponemos el mensaje y un botón de "X" para cerrarla
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  // Agregamos un evento para que si hacen clic en la 'X', se cierre
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName === "SPAN") {
+      main.removeChild(this);
+    }
+  });
+
+  // Lo insertamos al inicio del <main>
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  // Si scroll es true, llevamos al usuario arriba de la página para que vea el error
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}
+
+// Función extra para limpiar alertas viejas
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+}

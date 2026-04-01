@@ -1,6 +1,6 @@
 // CheckoutProcess.mjs
 import ExternalServices from "./ExternalServices.mjs";
-import { getLocalStorage} from "./utils.mjs";
+import { getLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 
 const services = new ExternalServices();
 
@@ -78,7 +78,7 @@ export default class CheckoutProcess {
     orderTotalElement.innerText = `$${this.orderTotal.toFixed(2)}`;
     }
 
-    async checkout(form) {
+async checkout(form) {
         const jsonStr = formDataToJSON(form);
 
         jsonStr.orderDate = new Date().toISOString();
@@ -88,11 +88,25 @@ export default class CheckoutProcess {
         jsonStr.items = packageItems(this.list);
 
         try {
+            // 1. Enviamos jsonStr al servidor
             const res = await services.checkout(jsonStr);
             console.log("Order succesful: ", res);
-        } 
-        catch (err) {
+            
+            // 2. Si lo anterior funcionó, vaciamos el carrito
+            localStorage.removeItem("so-cart");
+
+            // 3. Redirigimos a la página de éxito
+            window.location.href = "success.html";
+            
+        } catch (err) {
+
+            removeAllAlerts();
+            // Si algo falla en el proceso, atrapamos el error aquí
             console.error("Error in checkout", err);
+
+            for (let key in err.message) {
+                alertMessage(err.message[key]);
+            }
         }
     }
 }

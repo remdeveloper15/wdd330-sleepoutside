@@ -45,10 +45,10 @@
               Shipping & Billing
             </legend>
             <label>
-              First Name: <input type="text" name="fname" required>
+              First Name: <input type="text" name="fname" required minlength="2">
             </label>
             <label> 
-              Last Name: <input type="text" name="lname" required>
+              Last Name: <input type="text" name="lname" required minlength="2">
             </label>
             <label>
               Street Address: <input type="text" name="street" required>
@@ -60,7 +60,7 @@
               State: <input type="text" name="state" required>
             </label>
             <label>
-              Zip Code: <input type="text" name="zip" id="zip" required>
+              Zip Code: <input type="text" name="zip" id="zip" required pattern="[0-9]{5}" title="5 digits number">
             </label>
           </fieldset>
 
@@ -87,6 +87,5 @@
 
     <footer id="main-footer"></footer>
      <script src="../js/checkout.js" type="module"></script>
-  </body>
   </body>
 </html>
