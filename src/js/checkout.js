@@ -8,7 +8,16 @@ document.querySelector("#zip").addEventListener("blur", myCheckout.calculateOrde
 
 document.forms["checkout"].addEventListener("submit", (e) => {
     e.preventDefault();
-    myCheckout.checkout(e.target);
-})
+    
+    const myForm = document.forms[0];
+    const check_status = myForm.checkValidity();
+
+    // Cambiamos checkValidity por reportValidity aquí:
+    myForm.reportValidity();
+
+    if(check_status) {
+        myCheckout.checkout(myForm);
+    }
+});
 
 loadHeaderFooter();
